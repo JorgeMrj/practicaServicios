@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💥 FALLASTE PERRITO 💥</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+        background-size: 400% 400%;
+        animation: gradientShift 5s ease infinite;
+        font-family: 'Comic Neue', cursive;
+        overflow: hidden;
+        position: relative;
+      }
+
+      @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .container {
+        text-align: center;
+        z-index: 10;
+        position: relative;
+      }
+
+      h1 {
+        color: white;
+        font-size: 5em;
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 
+                     0 0 40px #ff00ff, 0 0 70px #ff00ff, 0 0 80px #ff00ff, 
+                     0 0 100px #ff00ff, 0 0 150px #ff00ff;
+        margin-bottom: 40px;
+        animation: megaBounce 0.5s infinite, rainbow 2s linear infinite, shake 0.3s infinite;
+        font-weight: 900;
+        letter-spacing: 10px;
+      }
+
+      @keyframes rainbow {
+        0% { color: #ff0000; }
+        16% { color: #ff8800; }
+        33% { color: #ffff00; }
+        50% { color: #00ff00; }
+        66% { color: #0088ff; }
+        83% { color: #8800ff; }
+        100% { color: #ff0000; }
+      }
+
+      @keyframes megaBounce {
+        0%, 100% {
+          transform: scale(1) rotate(-2deg);
+        }
+        50% {
+          transform: scale(1.2) rotate(2deg);
+        }
+      }
+
+      @keyframes shake {
+        0%, 100% { transform: translateX(0) rotate(0deg); }
+        25% { transform: translateX(-10px) rotate(-5deg); }
+        75% { transform: translateX(10px) rotate(5deg); }
+      }
+
+      .dog {
+        font-size: 12em;
+        animation: crazyWalk 2s linear infinite;
+        display: inline-block;
+        filter: drop-shadow(0 0 20px rgba(255,255,0,0.8));
+      }
+
+      @keyframes crazyWalk {
+        0% {
+          transform: translateX(-120vw) translateY(0) scaleX(1) rotate(0deg);
+        }
+        25% {
+          transform: translateX(-20vw) translateY(-50px) scaleX(1) rotate(360deg);
+        }
+        49% {
+          transform: translateX(50vw) translateY(0) scaleX(1) rotate(720deg);
+        }
+        50% {
+          transform: translateX(50vw) translateY(0) scaleX(-1) rotate(0deg);
+        }
+        75% {
+          transform: translateX(-20vw) translateY(50px) scaleX(-1) rotate(-360deg);
+        }
+        100% {
+          transform: translateX(-120vw) translateY(0) scaleX(-1) rotate(-720deg);
+        }
+      }
+
+      .message {
+        color: #fff;
+        font-size: 2.5em;
+        margin-top: 30px;
+        animation: flashText 0.5s infinite, pulse 1s infinite;
+        font-weight: bold;
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+      }
+
+      @keyframes flashText {
+        0%, 50%, 100% { opacity: 1; }
+        25%, 75% { opacity: 0.3; }
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+      }
+
+      .emoji-rain {
+        position: fixed;
+        top: -50px;
+        font-size: 3em;
+        animation: fall linear infinite;
+        z-index: 1;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(110vh) rotate(360deg);
+        }
+      }
+
+      .explosion {
+        position: fixed;
+        font-size: 6em;
+        animation: explode 1s ease-out infinite;
+        pointer-events: none;
+      }
+
+      @keyframes explode {
+        0% {
+          transform: scale(0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(3) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .spinning-dog {
+        position: fixed;
+        font-size: 4em;
+        animation: orbit 3s linear infinite;
+        pointer-events: none;
+      }
+
+      @keyframes orbit {
+        from {
+          transform: rotate(0deg) translateX(200px) rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg) translateX(200px) rotate(-360deg);
+        }
+      }
+
+      .alert-box {
+        background: rgba(255, 0, 0, 0.8);
+        border: 5px solid #ffff00;
+        padding: 20px;
+        border-radius: 20px;
+        animation: alertPulse 0.5s infinite;
+        margin-top: 30px;
+        box-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+      }
+
+      @keyframes alertPulse {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 0 80px rgba(255, 255, 0, 0.9);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>💥💥💥 ¡FALLASTE PERRITO! 💥💥💥</h1>
+      <div class="dog">🐕</div>
+      <div class="message">😱😱😱 ¡QUÉ DECEPCIÓN! 😱😱😱</div>
+      <div class="alert-box">
+        <div style="font-size: 2em; color: yellow; animation: shake 0.2s infinite;">
+          ⚠️ NIVEL DE FRACASO: CRÍTICO ⚠️
+        </div>
+      </div>
+    </div>
+
+    <!-- Perros orbitando -->
+    <div class="spinning-dog" style="top: 50%; left: 50%;">🐕</div>
+    <div class="spinning-dog" style="top: 50%; left: 50%; animation-delay: -1s;">🐶</div>
+    <div class="spinning-dog" style="top: 50%; left: 50%; animation-delay: -2s;">🦮</div>
+
+    <!-- Explosiones -->
+    <div class="explosion" style="top: 20%; left: 20%; animation-delay: 0s;">💥</div>
+    <div class="explosion" style="top: 80%; left: 80%; animation-delay: 0.3s;">💥</div>
+    <div class="explosion" style="top: 20%; left: 80%; animation-delay: 0.6s;">💥</div>
+    <div class="explosion" style="top: 80%; left: 20%; animation-delay: 0.9s;">💥</div>
+
+    <script>
+      // Lluvia de emojis
+      function createEmojiRain() {
+        const emojis = ['🐕', '🐶', '💔', '😭', '❌', '💥', '⚠️', '😱'];
+        setInterval(() => {
+          const emoji = document.createElement('div');
+          emoji.className = 'emoji-rain';
+          emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          emoji.style.left = Math.random() * 100 + '%';
+          emoji.style.animationDuration = (Math.random() * 3 + 2) + 's';
+          document.body.appendChild(emoji);
+          
+          setTimeout(() => emoji.remove(), 5000);
+        }, 300);
+      }
+
+      createEmojiRain();
+
+      // Vibración del documento
+      setInterval(() => {
+        document.body.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+      }, 50);
+    </script>
+      <p class="message">El perrito está decepcionado... </p>
+    </div>
+  </body>
+</html>
