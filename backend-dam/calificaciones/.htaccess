@@ -1,0 +1,12 @@
+AuthType Basic
+AuthName "Zona protegida DAM"
+AuthBasicProvider ldap
+
+AuthLDAPURL "ldap://172.20.0.3/ou=users,dc=iesluisvives,dc=local?cn?sub"
+
+AuthLDAPBindDN "cn=admin,dc=iesluisvives,dc=local"
+AuthLDAPBindPassword admin
+
+LDAPVerifyServerCert Off
+
+Require valid-user

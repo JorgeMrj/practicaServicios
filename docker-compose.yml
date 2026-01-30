@@ -1,0 +1,86 @@
+services:
+  bind9:
+    image: ubuntu/bind9
+    container_name: dns-server
+    networks:
+      red-vives:
+        ipv4_address: 172.20.0.2
+    volumes:
+      - ./dns/named.conf.local:/etc/bind/named.conf.local
+      - ./dns/db.iesluisvives.local:/etc/bind/db.iesluisvives.local
+    restart: always
+
+  openldap:
+    image: osixia/openldap:1.5.0
+    container_name: ldap-server
+    environment:
+      LDAP_ORGANISATION: "IES Luis Vives"
+      LDAP_DOMAIN: "iesluisvives.local"
+      LDAP_ADMIN_PASSWORD: "admin"
+      LDAP_TLS: "false"
+      LDAP_REMOVE_CONFIG_AFTER_SETUP: "false"
+      LDAP_NO_REPLICATION: "true"
+    networks:
+      red-vives:
+        ipv4_address: 172.20.0.3
+    volumes:
+      - ./ldap/users.ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom/users.ldif
+    command: ["--copy-service"]
+    restart: always
+
+  phpldapadmin:
+    image: osixia/phpldapadmin:latest
+    container_name: phpldapadmin
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: "openldap"
+      PHPLDAPADMIN_HTTPS: "false"
+    ports:
+      - "8087:80"
+    networks:
+      red-vives:
+        ipv4_address: 172.20.0.4
+    depends_on:
+      - openldap
+
+  daw-server:
+    image: nginx:alpine
+    container_name: backend-daw
+    networks:
+      red-vives:
+        ipv4_address: 172.20.0.20
+    volumes:
+      - ./backend-daw:/usr/share/nginx/html
+    restart: always
+
+  dam-server:
+    image: httpd:alpine
+    container_name: backend-dam
+    networks:
+      red-vives:
+        ipv4_address: 172.20.0.30
+    volumes:
+      - ./backend-dam:/usr/local/apache2/htdocs
+    restart: always
+
+  proxy:
+    image: nginx:latest
+    container_name: proxy-vives
+    ports:
+      - "80:80"
+    networks:
+      red-vives:
+        ipv4_address: 172.20.0.10
+    volumes:
+      - ./nginx-proxy/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx-proxy/.htpasswd:/etc/nginx/.htpasswd
+    depends_on:
+      - daw-server
+      - dam-server
+    restart: always
+
+networks:
+  red-vives:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
